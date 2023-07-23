@@ -12,6 +12,7 @@ module.exports = language => {
     let numberLinesStartAt
     let promptUserLocal
     let promptHostLocal
+    let title
     // Options can be given in any order and are optional
 
     options.forEach(option => {
@@ -47,6 +48,9 @@ module.exports = language => {
       if (splitOption.length === 2 && splitOption[0] === `outputLines`) {
         outputLines = rangeParser(splitOption[1].trim()).filter(n => n > 0)
       }
+      if (splitOption.length === 2 && splitOption[0] === `title`) {
+        title = splitOption[1];
+      }
     })
 
     return {
@@ -57,6 +61,7 @@ module.exports = language => {
       outputLines,
       promptUserLocal,
       promptHostLocal,
+      title,
     }
   }
 

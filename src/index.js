@@ -5,6 +5,7 @@ const highlightCode = require(`./highlight-code`)
 const addLineNumbers = require(`./add-line-numbers`)
 const commandLine = require(`./command-line`)
 const loadPrismShowInvisibles = require(`./plugins/prism-show-invisibles`)
+const addTitle = require(`./title`)
 
 const DIFF_HIGHLIGHT_SYNTAX = /^(diff)-([\w-]+)/i
 
@@ -45,6 +46,7 @@ module.exports = (
       outputLines,
       promptUserLocal,
       promptHostLocal,
+      title,
     } = parseOptions(language)
     const showLineNumbers = showLineNumbersLocal || showLineNumbersGlobal
     const promptUser = promptUserLocal || prompt.user
@@ -124,6 +126,7 @@ module.exports = (
     // prettier-ignore
     node.value = ``
     + `<div class="${highlightClassName}" data-language="${languageName}">`
+    +   `${title ? addTitle(title) : ''}`
     +   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
     +     `<code class="${className}">`
     +       `${useCommandLine ? commandLine(node.value, outputLines, promptUser, promptHost) : ``}`
