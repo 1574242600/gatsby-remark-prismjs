@@ -6,6 +6,7 @@ const addLineNumbers = require(`./add-line-numbers`)
 const commandLine = require(`./command-line`)
 const loadPrismShowInvisibles = require(`./plugins/prism-show-invisibles`)
 const addTitle = require(`./title`)
+const addShowLanguage = require(`./show-language`)
 
 const DIFF_HIGHLIGHT_SYNTAX = /^(diff)-([\w-]+)/i
 
@@ -47,6 +48,7 @@ module.exports = (
       promptUserLocal,
       promptHostLocal,
       title,
+      showLanguage
     } = parseOptions(language)
     const showLineNumbers = showLineNumbersLocal || showLineNumbersGlobal
     const promptUser = promptUserLocal || prompt.user
@@ -128,6 +130,7 @@ module.exports = (
     + `<div class="${highlightClassName}" data-language="${languageName}">`
     +   `${title ? addTitle(title) : ''}`
     +   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
+    +     `${showLanguage ? addShowLanguage(languageName) : ''}`
     +     `<code class="${className}">`
     +       `${useCommandLine ? commandLine(node.value, outputLines, promptUser, promptHost) : ``}`
     +       `${highlightedCode}`

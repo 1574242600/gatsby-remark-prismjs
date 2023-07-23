@@ -13,6 +13,7 @@ module.exports = language => {
     let promptUserLocal
     let promptHostLocal
     let title
+    let showLanguage = true
     // Options can be given in any order and are optional
 
     options.forEach(option => {
@@ -51,6 +52,9 @@ module.exports = language => {
       if (splitOption.length === 2 && splitOption[0] === `title`) {
         title = splitOption[1];
       }
+      if (splitOption.length === 2 && splitOption[0] === `showLanguage`) {
+        showLanguage = splitOption[1] === 'true';
+      }
     })
 
     return {
@@ -62,6 +66,7 @@ module.exports = language => {
       promptUserLocal,
       promptHostLocal,
       title,
+      showLanguage
     }
   }
 
