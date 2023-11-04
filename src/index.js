@@ -125,12 +125,12 @@ module.exports = (
         promptUserLocal ||
         promptHostLocal)
 
+    const header = `<div class="code-block-header">${title ? addTitle(title) : ''}${showLanguage ? addShowLanguage(languageName) : ''}</div>`
     // prettier-ignore
     node.value = ``
     + `<div class="${highlightClassName}" data-language="${languageName}">`
-    +   `${title ? addTitle(title) : ''}`
+    +   `${(title || showLanguage) ? header : ''}`
     +   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
-    +     `${showLanguage ? addShowLanguage(languageName) : ''}`
     +     `<code class="${className}">`
     +       `${useCommandLine ? commandLine(node.value, outputLines, promptUser, promptHost) : ``}`
     +       `${highlightedCode}`
